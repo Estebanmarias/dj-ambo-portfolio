@@ -45,7 +45,7 @@ const EventCard = ({ event, index }: { event: Event; index: number }) => {
   };
 
   const handleReserve = () => {
-    window.open('https://api.whatsapp.com/send/?phone=2348145345218', '_blank');
+    window.open('https://wa.me/2349026437706?text=Hello%2C%20I%20want%20to%20buy%20a%20ticket%20for%20your%20event', '_blank');
   };
 
   return (

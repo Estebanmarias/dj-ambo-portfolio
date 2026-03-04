@@ -101,33 +101,33 @@ export default function Contact() {
             {/* Social Links */}
             <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
               <h3 className="text-2xl font-bold mb-6 text-white">Follow DJ AMBO</h3>
-              <div className="flex gap-4">
+              <div className="grid grid-cols-3 gap-3">
                 <a
                   href="https://www.facebook.com/deejayAmbo?mibextid=LQQJ4d"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-3 p-4 rounded-xl bg-[#1877F2]/10 hover:bg-[#1877F2]/20 border border-[#1877F2]/20 hover:border-[#1877F2]/50 text-[#1877F2] transition-all group"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-2 p-3 rounded-xl bg-[#1877F2]/10 hover:bg-[#1877F2]/20 border border-[#1877F2]/20 hover:border-[#1877F2]/50 text-[#1877F2] transition-all group"
                 >
                   <FacebookIcon />
-                  <span className="font-medium text-sm">Facebook</span>
+                  <span className="font-medium text-xs sm:text-sm">Facebook</span>
                 </a>
                 <a
                   href="https://tiktok.com/@deejayambo"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 text-white transition-all group"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-2 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 text-white transition-all group"
                 >
                   <TikTokIcon />
-                  <span className="font-medium text-sm">TikTok</span>
+                  <span className="font-medium text-xs sm:text-sm">TikTok</span>
                 </a>
                 <a
                   href="https://instagram.com/Deejay_ambo"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-3 p-4 rounded-xl bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/20 hover:border-[#E1306C]/50 text-[#E1306C] transition-all group"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-2 p-3 rounded-xl bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/20 hover:border-[#E1306C]/50 text-[#E1306C] transition-all group"
                 >
                   <InstagramIcon />
-                  <span className="font-medium text-sm">Instagram</span>
+                  <span className="font-medium text-xs sm:text-sm">Instagram</span>
                 </a>
               </div>
             </div>
