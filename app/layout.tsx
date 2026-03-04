@@ -11,6 +11,10 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "DJ AMBO | Professional DJ & Event Hypeman",
   description: "Fatoki Paul, known as DJ Ambo, is Ogbomoso's go-to DJ for every occasion. Rooted in Afrobeats, Amapiano, and Hip-Hop.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "DJ AMBO | Professional DJ & Event Hypeman",
     description: "Ogbomoso's go-to DJ for every occasion. Rooted in Afrobeats, Amapiano, and Hip-Hop.",
