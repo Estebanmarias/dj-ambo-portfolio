@@ -46,10 +46,10 @@ export default function Navbar() {
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         <a href="#home" onClick={(e) => handleScrollTo(e, "#home")} className="flex items-center">
           <img
-            src="/favicon.png"
+            src="/favicon.jpg"
             alt="DJ AMBO"
             className="h-16 w-auto object-contain"
-          />
+          /> <h1 className="text-xl font-bold text-metallicGold drop-shadow">DJ AMBO</h1>
         </a>
 
         {/* Desktop Nav */}
