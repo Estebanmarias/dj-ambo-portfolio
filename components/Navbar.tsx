@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -43,8 +44,12 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="#home" onClick={(e) => handleScrollTo(e, "#home")} className="text-2xl font-black tracking-tighter text-metallicGold">
-          DJ AMBO
+        <a href="#home" onClick={(e) => handleScrollTo(e, "#home")} className="flex items-center">
+          <img
+            src="/favicon.png"
+            alt="DJ AMBO"
+            className="h-16 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop Nav */}
