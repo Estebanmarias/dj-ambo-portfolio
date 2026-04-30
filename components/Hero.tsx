@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Music, ChevronDown } from "lucide-react";
 
@@ -39,11 +39,41 @@ const platforms = [
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const updatePosition = useCallback(() => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPos({
+        top: rect.bottom + 8,
+        left: rect.left,
+        width: Math.max(rect.width, 220),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      updatePosition();
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
+    }
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [open, updatePosition]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     };
@@ -52,13 +82,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Blur orbs — constrained to not overflow */}
+    <section id="home" className="relative min-h-screen flex items-center pt-24">
       <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-neonPurple/20 rounded-full blur-[100px] -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-neonPurple/10 rounded-full blur-[80px] -z-10 pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-        {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -80,7 +108,10 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
             {["Afrobeats", "Amapiano", "Hip-Hop"].map((genre) => (
-              <span key={genre} className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 rounded-md text-xs sm:text-sm text-white/70 border border-white/10">
+              <span
+                key={genre}
+                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 rounded-md text-xs sm:text-sm text-white/70 border border-white/10 hover:border-neonPurple/50 hover:text-neonPurple transition-all duration-300 cursor-default select-none"
+              >
                 {genre}
               </span>
             ))}
@@ -89,17 +120,20 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8">
             <a
               href="#contact"
-              className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-neonPurple text-white font-bold rounded-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(176,68,255,0.6)]"
+              className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-neonPurple text-white font-bold rounded-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(176,68,255,0.6)] animate-pulse-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Book Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </span>
             </a>
 
-            {/* Listen dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative">
               <button
-                onClick={() => setOpen(!open)}
+                ref={buttonRef}
+                onClick={() => {
+                  if (!open) updatePosition();
+                  setOpen(!open);
+                }}
                 className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-neonPurple text-neonPurple font-bold rounded-lg hover:bg-neonPurple/10 transition-colors gap-2 w-full sm:w-auto"
               >
                 <Music size={18} /> Listen to Mix
@@ -108,9 +142,15 @@ export default function Hero() {
 
               {open && (
                 <motion.div
+                  ref={dropdownRef}
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute left-0 right-0 sm:left-auto sm:right-auto mt-2 w-full sm:w-52 bg-[#12001a] border border-neonPurple/20 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(176,68,255,0.2)] z-[999]"
+                  className="fixed bg-[#12001a] border border-neonPurple/20 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(176,68,255,0.2)] z-[9999]"
+                  style={{
+                    top: dropdownPos.top,
+                    left: dropdownPos.left,
+                    width: dropdownPos.width,
+                  }}
                 >
                   {platforms.map((p) => (
                     <a
@@ -132,7 +172,6 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Content */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -144,7 +183,6 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-t from-deepPurple via-transparent to-transparent opacity-80" />
           </div>
 
-          {/* Floating stats card — fixed negative margin causing overflow */}
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

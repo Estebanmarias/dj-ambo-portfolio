@@ -4,6 +4,8 @@ import About from "@/components/About";
 import Events from "@/components/Events";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
+import BackToTop from "@/components/BackToTop";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <Events />
       <Gallery />
       <Contact />
+      <Footer />
+      <BackToTop />
     </main>
   );
 }
