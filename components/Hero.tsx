@@ -47,48 +47,49 @@ export default function Hero() {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20">
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neonPurple/20 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neonPurple/10 rounded-full blur-[100px] -z-10" />
+    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      {/* Blur orbs — constrained to not overflow */}
+      <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-neonPurple/20 rounded-full blur-[100px] -z-10 pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-neonPurple/10 rounded-full blur-[80px] -z-10 pointer-events-none" />
 
-      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-6"
+          className="space-y-4 sm:space-y-6"
         >
-          <div className="inline-block px-4 py-1.5 rounded-full border border-neonPurple/30 bg-neonPurple/10 text-neonPurple text-sm font-medium tracking-wide">
+          <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-neonPurple/30 bg-neonPurple/10 text-neonPurple text-xs sm:text-sm font-medium tracking-wide">
             Ogbomoso, Nigeria
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight break-words">
             FATOKI PAUL <br />
             <span className="text-metallicGold drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">DJ AMBO</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 font-light">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 font-light">
             Professional DJ • Event Hypeman • Sound Curator
           </p>
 
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
             {["Afrobeats", "Amapiano", "Hip-Hop"].map((genre) => (
-              <span key={genre} className="px-4 py-2 bg-white/5 rounded-md text-sm text-white/70 border border-white/10">
+              <span key={genre} className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 rounded-md text-xs sm:text-sm text-white/70 border border-white/10">
                 {genre}
               </span>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8">
             <a
               href="#contact"
-              className="group relative inline-flex items-center justify-center px-8 py-4 bg-neonPurple text-white font-bold rounded-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(176,68,255,0.6)]"
+              className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-neonPurple text-white font-bold rounded-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(176,68,255,0.6)]"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Book Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -99,7 +100,7 @@ export default function Hero() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpen(!open)}
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-neonPurple text-neonPurple font-bold rounded-lg hover:bg-neonPurple/10 transition-colors gap-2 w-full sm:w-auto"
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-neonPurple text-neonPurple font-bold rounded-lg hover:bg-neonPurple/10 transition-colors gap-2 w-full sm:w-auto"
               >
                 <Music size={18} /> Listen to Mix
                 <ChevronDown size={16} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -109,7 +110,7 @@ export default function Hero() {
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute left-0 mt-2 w-52 bg-[#12001a] border border-neonPurple/20 rounded-xl overflow-visible shadow-[0_0_20px_rgba(176,68,255,0.2)] z-[999]"
+                  className="absolute left-0 right-0 sm:left-auto sm:right-auto mt-2 w-full sm:w-52 bg-[#12001a] border border-neonPurple/20 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(176,68,255,0.2)] z-[999]"
                 >
                   {platforms.map((p) => (
                     <a
@@ -136,30 +137,31 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center"
+          className="relative h-[400px] sm:h-[500px] lg:h-[700px] w-full flex items-center justify-center"
         >
-          <div className="relative w-full max-w-md aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm">
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm">
             <img src="/images/profile.jpg" alt="DJ Ambo" className="object-cover w-full h-full" />
             <div className="absolute inset-0 bg-gradient-to-t from-deepPurple via-transparent to-transparent opacity-80" />
           </div>
 
+          {/* Floating stats card — fixed negative margin causing overflow */}
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-10 -left-4 md:left-0 bg-deepPurple/90 backdrop-blur-md border border-neonPurple/30 p-6 rounded-2xl shadow-[0_0_30px_rgba(176,68,255,0.15)]"
+            className="absolute bottom-6 sm:bottom-10 left-2 sm:left-4 md:left-0 bg-deepPurple/90 backdrop-blur-md border border-neonPurple/30 p-4 sm:p-6 rounded-2xl shadow-[0_0_30px_rgba(176,68,255,0.15)] max-w-[200px] sm:max-w-none"
           >
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3">
+            <ul className="space-y-2 sm:space-y-3">
+              <li className="flex items-center gap-2 sm:gap-3">
                 <div className="w-2 h-2 rounded-full bg-neonPurple shadow-[0_0_8px_#B044FF]" />
-                <span className="font-medium">7+ Years Active</span>
+                <span className="text-sm sm:font-medium">7+ Years Active</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-2 sm:gap-3">
                 <div className="w-2 h-2 rounded-full bg-metallicGold shadow-[0_0_8px_#D4AF37]" />
-                <span className="font-medium">200+ Events</span>
+                <span className="text-sm sm:font-medium">200+ Events</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-2 sm:gap-3">
                 <div className="w-2 h-2 rounded-full bg-neonPurple shadow-[0_0_8px_#B044FF]" />
-                <span className="font-medium">Resident DJ</span>
+                <span className="text-sm sm:font-medium">Resident DJ</span>
               </li>
             </ul>
           </motion.div>
